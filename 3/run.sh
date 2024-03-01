@@ -2,14 +2,13 @@
 
 set -e 
 
-docker build -t jenkins:local . 
-docker run --rm -d --name jenkins -p 8080:8080 jenkins:local
+eval $(minikube docker-env)
+# TODO: This is failing locally in a fresh terminal env... not sure why yet... 
+# (need to run minikube start prior to running this script)
+minikube start
 
-sleep 30 
+read "Press Enter to continue"
 
-admin_pass=$(docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword)
-echo ""
-echo "Admin password: $admin_pass"
-echo ""
+minikube stop 
 
 # TODO: Automate the Jenkinsfile execution with JobDSL, CasC, etc... 

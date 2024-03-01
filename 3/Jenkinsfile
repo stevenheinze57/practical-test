@@ -3,10 +3,13 @@ pipeline {
     stages {
         stage('Build image') {
             steps {
-                var BTC_VERSION="22.0"
-                git(url: 'https://github.com/stevenheinze57/practical-test.git', branch: 'master')
-                sh(script: "docker build --build-arg \"BTC_VERSION=${BTC_VERSION}\" -t bitcoin:${BTC_VERSION} -f Dockerfile . ")
-                //kubernetesApply(createNewResources: true, deletePodsOnReplicationControllerUpdate: false, ignoreRunningOAuthClients: false, ignoreServices: false, processTemplatesLocally: false, readinessTimeout: 0, rollingUpgradePreserveScale: true, rollingUpgrades: true, servicesOnly: false)
+                script {
+                    BTC_VERSION="22.0"
+                    git(url: 'https://github.com/stevenheinze57/practical-test.git', branch: 'main')
+                    sh(script: "docker build --build-arg \"BTC_VERSION=${BTC_VERSION}\" -t bitcoin:${BTC_VERSION} -f 1/Dockerfile . ")
+                    sh(script: "kubectl apply -f 2/deployment.yaml")
+                    sh(script: "kubectl rollout status -w deployment/bitcoin ")
+                }
             }
         }
     }

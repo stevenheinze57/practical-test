@@ -23,4 +23,6 @@ echo "Deploying"
 kubectl apply -f deployment.yaml 
 kubectl rollout status -w deployment/bitcoin 
 
+read "Press Enter to continue"
+
 minikube stop 
