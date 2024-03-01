@@ -7,6 +7,7 @@ while read -r line; do
     ip=$(echo $line | cut -d ' ' -f 2)
     if [[ $(echo ${unique_ips[@]} | grep -w $ip) ]]; then 
         echo "Already exists" 
+        # TODO: need to increment here 
     else 
         echo "Doesnt exist" 
         unique_ips+=($ip)
