@@ -18,5 +18,4 @@ docker build --build-arg "BTC_VERSION=${BTC_VERSION}" -t bitcoin:${BTC_VERSION} 
 syft bitcoin:${BTC_VERSION}
 grype bitcoin:${BTC_VERSION}
 
-# Not enough space on local for this... 
 docker run --rm -it -v "bitcoin:/root/.bitcoin" -p 8333:8333 -p 8332:8332 bitcoin:${BTC_VERSION}

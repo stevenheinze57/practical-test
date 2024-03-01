@@ -1,0 +1,34 @@
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bitcoin 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bitcoin 
+  template:
+    metadata:
+      labels:
+        app: bitcoin 
+    spec:
+      containers:
+      - name: bitcoin
+        image: bitcoin:22.0 
+        imagePullPolicy: Never 
+        ports:
+        - containerPort: 8333
+        - containerPort: 8332
+        livenessProbe:
+          tcpSocket:            
+            port: 8333               
+          initialDelaySeconds: 15  
+          periodSeconds: 10        
+        readinessProbe:
+          tcpSocket:               
+            port: 8333
+          initialDelaySeconds: 5   
+          periodSeconds: 5         

@@ -28,5 +28,5 @@ RUN rm bitcoin-${BTC_VERSION}-x86_64-linux-gnu.tar.gz
 # WORKDIR /bitcoin 
 # USER bitcoin 
 
-CMD [ "/opt/bitcoin-${BTC_VERSION}/bin/bitcoind" ]
+CMD [ "/opt/bitcoin/bin/bitcoind" ]
 # TODO: Add flags like '-rpcbind=:8332' '-rpcallowip=0.0.0.0/0'
