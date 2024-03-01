@@ -2,3 +2,4 @@
 
 set -e 
 
+python3 logfilter.py 
